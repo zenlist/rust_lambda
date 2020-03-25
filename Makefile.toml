@@ -1,0 +1,29 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = "true"
+CARGO_MAKE_WORKSPACE_SKIP_MEMBERS = "rustlamb_common"
+
+[tasks.build-release]
+args = [
+    "build", 
+    "--release", 
+    "--target", "x86_64-unknown-linux-musl"
+    ]
+
+[tasks.mkdir]
+command = "mkdir"
+args = ["-p", "target"]
+
+[tasks.copybin]
+command = "cp"
+args = [
+    "../target/x86_64-unknown-linux-musl/release/${CARGO_MAKE_CRATE_NAME}", 
+    "./target/bootstrap"
+    ]
+
+[tasks.pkg]
+dependencies = ["build-release", "mkdir", "copybin"]
+
+[tasks.deploy]
+workspace = false
+command = "cdk"
+args = [ "deploy" ]
