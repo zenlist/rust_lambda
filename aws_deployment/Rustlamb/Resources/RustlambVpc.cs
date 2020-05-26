@@ -19,7 +19,7 @@ namespace Rustlamb.Resources
                 MaxAzs = 3,
                 SubnetConfiguration = new SubnetConfiguration[] {
                     new SubnetConfiguration{
-                        Name = "RustlambPrivate",
+                        Name = "RustlambPublic",
                         CidrMask = 20,
                         SubnetType = SubnetType.PUBLIC
                     },
